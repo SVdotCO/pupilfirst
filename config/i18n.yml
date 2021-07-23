@@ -1,0 +1,6 @@
+---
+translations:
+  - file: app/javascript/locales.json
+    patterns:
+      - "*.components.*"
+      - "*.shared.*"

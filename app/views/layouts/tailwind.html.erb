@@ -1,65 +1,76 @@
 <% presenter = ::Layouts::TailwindPresenter.new(self) %>
 
 <!DOCTYPE html>
-<html lang='en' data-user-id="<%= current_user&.id %>" data-flash="<%= presenter.flash_messages %>" data-env="<%= Rails.env %>" data-vapid-public-key="<%= presenter.vapid_public_key_bytes %>" data-subscription-endpoint="<%= presenter.webpush_subscription_endpoint %>">
+<html
+  lang="<%= I18n.locale %>"
+  data-user-id="<%= current_user&.id %>"
+  data-flash="<%= presenter.flash_messages %>"
+  data-env="<%= Rails.env %>"
+  data-vapid-public-key="<%= presenter.vapid_public_key_bytes %>"
+  data-subscription-endpoint="<%= presenter.webpush_subscription_endpoint %>"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="manifest" href="/manifest.json" />
 
-<head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <link rel="manifest" href="/manifest.json">
-
-  <% if content_for?(:viewport) %>
-    <%= yield :viewport %>
-  <% else %>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <% end %>
-
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags. -->
-  <meta name="theme-color" content="#4D1E9A">
-  <%= yield :head %>
-
-  <!-- Styles -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <%= stylesheet_pack_tag 'layouts/tailwind', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_pack_tag 'IconFirstPack', media: 'all' %>
-
-  <!-- Scripts -->
-  <%= javascript_pack_tag 'layouts/tailwind', nonce: true %>
-
-  <%= javascript_tag(nonce: true) do %>
-    I18n.defaultLocale = "<%= I18n.default_locale %>";
-    I18n.locale = "<%= I18n.locale %>";
-  <% end %>
-
-  <%= javascript_pack_tag "translations/#{I18n.locale}", nonce: true %>
-
-  <%= csrf_meta_tags %>
-
-  <% if presenter.meta_description.present? %>
-    <meta name="description" content="<%= presenter.meta_description %>"/>
-    <meta property="og:description" content="<%= presenter.meta_description %>"/>
-  <% end %>
-
-  <link rel="icon" href="/favicon.ico"/>
-</head>
-
-<body data-host="<%= current_host %>">
-<section class="min-h-full flex flex-col items-stretch">
-  <%= yield :nav %>
-  <main class="flex-grow bg-gray-100">
-    <% if content_for?(:wrapper) %>
-      <%= yield :wrapper %>
+    <% if content_for?(:viewport) %>
+      <%= yield :viewport %>
     <% else %>
-      <%= yield %>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
     <% end %>
-  </main>
 
-  <%= yield :tail %>
-  <%= yield :footer %>
-</section>
-<!-- Scripts -->
-<%= javascript_pack_tag 'IconFirstPack', nonce: true %>
-</body>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags. -->
+    <meta name="theme-color" content="#4D1E9A" />
+    <%= yield :head %>
 
+    <!-- Styles -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <%= stylesheet_pack_tag 'layouts/tailwind', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'IconFirstPack', media: 'all' %>
+
+    <!-- Scripts -->
+    <%= javascript_pack_tag 'layouts/tailwind', nonce: true %>
+
+    <%= javascript_tag(nonce: true) do %>
+      i18n.defaultLocale = "<%= I18n.default_locale %>"; i18n.locale = "<%= I18n.locale %>";
+    <% end %>
+
+    <%= csrf_meta_tags %>
+
+    <% if presenter.meta_description.present? %>
+      <meta name="description" content="<%= presenter.meta_description %>" />
+      <meta
+        property="og:description"
+        content="<%= presenter.meta_description %>"
+      />
+    <% end %>
+
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+
+  <body data-host="<%= current_host %>">
+    <section class="min-h-full flex flex-col items-stretch">
+      <%= yield :nav %>
+      <main class="flex-grow bg-gray-100">
+        <% if content_for?(:wrapper) %>
+          <%= yield :wrapper %>
+        <% else %>
+          <%= yield %>
+        <% end %>
+      </main>
+
+      <%= yield :tail %>
+      <%= yield :footer %>
+    </section>
+    <!-- Scripts -->
+    <%= javascript_pack_tag 'IconFirstPack', nonce: true %>
+  </body>
 </html>

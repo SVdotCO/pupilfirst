@@ -33,7 +33,7 @@
     "dompurify": "^2.3.0",
     "dotenv": "^8.0.0",
     "file-saver": "^2.0.5",
-    "i18n-js": "^3.7.1",
+    "i18n-js": "^4.0.0-alpha.11",
     "markdown-it": "^10.0.0",
     "markdown-it-link-attributes": "^3.0.0",
     "markdown-it-linkify-images": "^2.0.0",
@@ -47,7 +47,6 @@
     "prismjs": "^1.24.1",
     "prop-types": "^15.7.2",
     "qrcode.react": "^1.0.0",
-    "rails-erb-loader": "^5.5.2",
     "react": "^16.8.6",
     "react-csv-reader": "^3.2.1",
     "react-datepicker": "^2.9.6",
@@ -84,7 +83,6 @@
     "prismjs": "^1.24.1"
   },
   "scripts": {
-    "postinstall": "test -n \"$NOYARNPOSTINSTALL\" || yarn run re:build",
     "re:build": "bsb -make-world -clean-world",
     "re:watch": "bsb -make-world -clean-world -w"
   }

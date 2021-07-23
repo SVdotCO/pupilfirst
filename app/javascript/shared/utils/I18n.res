@@ -13,8 +13,8 @@ type options = {
   defaults: array<Js.Dict.t<string>>,
 }
 
-@bs.scope("I18n") @bs.val
-external translate: (string, Js.t<'a>) => string = "translate"
+@bs.scope("i18n") @bs.val
+external translate: (string, Js.t<'a>) => string = "t"
 
 external optionsToJsObject: options => Js.t<'a> = "%identity"
 external variablesToJsObject: Js.Dict.t<string> => Js.t<'a> = "%identity"

@@ -1,10 +1,8 @@
-import I18n from "i18n-js";
+import { I18n } from "i18n-js";
+import translations from "locales.json";
 
-I18n.originalMissingTranslation = I18n.missingTranslation;
+export const i18n = new I18n(translations);
+i18n.locale = document.documentElement.lang || "en";
+i18n.missingTranslationPrefix = "Missing translation: ";
 
-I18n.missingTranslation = (scope, options) => {
-  console.error("Missing translation " + scope)
-  return I18n.originalMissingTranslation(scope, options);
-};
-
-global.I18n = I18n;
+global.i18n = i18n;

@@ -64,6 +64,8 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
+
+  config.after_initialize { I18nJS.call(config_file: 'config/i18n.yml') }
 end
 
 require 'flipper/adapters/pstore'

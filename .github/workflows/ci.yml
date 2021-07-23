@@ -2,13 +2,13 @@ name: Continuous Integration
 
 on:
   push:
-    branches: ['*']
+    branches: ["*"]
     paths-ignore:
-      - 'docs/**'
+      - "docs/**"
   pull_request:
-    branches: [ master ]
+    branches: [master]
     paths-ignore:
-      - 'docs/**'
+      - "docs/**"
 
 jobs:
   tests:
@@ -32,7 +32,9 @@ jobs:
 
     env:
       RAILS_ENV: test
-      RUBYOPT: '-W:no-deprecated -W:no-experimental'
+      I18N_AVAILABLE_LOCALES: en
+      I18N_DEFAULT_LOCALE: en
+      RUBYOPT: "-W:no-deprecated -W:no-experimental"
       JAVASCRIPT_DRIVER: headless_chrome
       DB_HOST: localhost
       DB_NAME_TEST: postgres
@@ -52,7 +54,7 @@ jobs:
       - name: Use Ruby 2.7
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: "2.7"
       - name: Set branch name & commit SHA in env
         uses: actions/github-script@v3
         with:
@@ -103,6 +105,8 @@ jobs:
             node_modules
             app/javascript/packages/*/node_modules
           key: ${{ runner.os }}-lerna-${{ hashFiles('**/yarn.lock') }}
+      - name: Yarn Install
+        run: yarn install
       - name: Precompile Assets
         run: |
           bundle exec rails assets:precompile

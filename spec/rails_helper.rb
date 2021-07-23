@@ -183,6 +183,3 @@ Capybara::Screenshot.prune_strategy = { keep: 20 }
     driver.browser.save_screenshot(path)
   end
 end
-
-# Faker should use India as locale.
-Faker::Config.locale = 'en-IND'
